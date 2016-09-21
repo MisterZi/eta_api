@@ -1,28 +1,30 @@
-== README
+== Описание
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+API для расчета примерного времени подачи машины (ETA).
 
-Things you may want to cover:
+Реализовано на языке программирования Ruby v. 2.3.0 с использованием фреймворка Ruby on Rails v. 4.2.6
 
-* Ruby version
+== Установка и настройка
 
-* System dependencies
+Для запуска API Вам понадобятся установленные Ruby и Ruby on Rails.
 
-* Configuration
+Выполните следующие действия:
 
-* Database creation
+* Клонируйте git репозиторий (зеленая кнопочка в правом верхнем углу GitHub)
 
-* Database initialization
+* Запустите из терминала с корневой папки проекта <tt>bundle install</tt>
 
-* How to run the test suite
+* Выполните <tt>rake db:migrate</tt> для миграции БД
 
-* Services (job queues, cache servers, search engines, etc.)
+* Выполните <tt>rails c</tt> и заполните базу объектами машин Car.create(position: 'car_lat car_long', available: true/false),
+где car_lat и car_long - соответственно широта и долгота машины в градусах, а available - доступность.
+Например:  <tt>Car.create(position: '59.68325474 30.4323864', available: true)</tt>
 
-* Deployment instructions
+== Запуск
 
-* ...
+* Поднимите локальный сервер командой rails s
 
+* Сделайте GET запрос с параметром position=[lat,long], где lat и long - соответственно широта и долгота юзера в градусах.
+Например: http://localhost:3000/cars?position=[59.68307602,30.44058859]
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* Получите JSON с ETA в минутах
